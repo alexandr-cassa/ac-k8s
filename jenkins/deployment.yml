@@ -1,29 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: g2048
+  name: jenkins
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: g2048
+      app: jenkins
   template:
     metadata:
       labels:
-        app: g2048
+        app: jenkins
     spec:
       containers:
-        - name: g2048
-          image: g2048:v2
+        - name: jenkins
+          image: dockered-jenkins:v3
           imagePullPolicy: IfNotPresent
-          env:
-            - name: DB_USERNAME
-              value: postgres
-            - name: DB_PASSWORD
-              value: postgres
-            - name: DB_URL
-              value: jdbc:postgresql://postgres:5432/g2048db
-            - name: REDIS_HOST
-              value: redis
-            - name: REDIS_PORT
-              value: "6379"
+          volumeMounts:
+                - name: jenkins-home
+                  mountPath: /var/lib/jenkins-home
+          ports:
+            - containerPort: 8080
+      volumes:
+        - name: jenkins-home
+          persistentVolumeClaim:
+            claimName: jenkins-pvc
