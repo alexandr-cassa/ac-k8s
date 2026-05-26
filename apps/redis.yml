@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: g2048
+  name: redis
   namespace: devops
 spec:
   project: default
   source:
     repoURL: https://github.com/alexandr-cassa/ac-k8s.git
     targetRevision: HEAD
-    path: g2048
+    path: redis
   destination:
     server: https://kubernetes.default.svc
     namespace: app
@@ -16,5 +16,5 @@ spec:
     syncOptions:
       - CreateNamespace=true
     automated:
-        prune: true
-        selfHeal: true
+      prune: true
+      selfHeal: true
