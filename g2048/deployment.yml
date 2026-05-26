@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: g2048
-          image: g2048:0b5b27a
+          image: g2048:78868c2
           imagePullPolicy: IfNotPresent
           env:
             - name: DB_USERNAME
