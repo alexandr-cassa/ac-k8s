@@ -15,14 +15,11 @@ spec:
     spec:
       containers:
         - name: jenkins
-          image: jenkins:mavened
+          image: dockered-jenkins:v3
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
               containerPort: 8080
-          env:
-            - name: DOCKER_HOST
-              value: tcp://localhost:2375
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
